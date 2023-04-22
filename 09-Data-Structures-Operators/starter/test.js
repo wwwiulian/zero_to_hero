@@ -66,17 +66,33 @@ const game = {
   date: 'Nov 9th, 2037',
   odds: {
     team1: 1.33,
-    x: 3.25,
+    x: 4.25,
     team2: 6.5,
   },
 };
 
-let player1 = [...game.players[0]];
-let player2 = [...game.players[1]];
+const [players1, players2] = game.players;
 
-let [gk, ...fieldPlayers] = player1;
-console.log(player1);
-console.log(gk);
-console.log(fieldPlayers);
+let [gk, ...fieldPlayers] = players1;
 
-console.log(player2);
+let allPlayers = [...players1, ...players2];
+
+let playersFinal = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+
+let { team1, x: draw, team2 } = game.odds;
+
+function printGoals(...playerNames) {
+  let score = playerNames.length;
+  for (let i = 0; i < score; i++) {
+    console.log(playerNames[i]);
+  }
+  console.log(`${score} goals were scored.`);
+}
+
+printGoals(...game.scored);
+
+console.log(team1 || team2);
+
+team1 < team2 && console.log('Team 1 is more likely to win');
+team1 > team2 && console.log('Team 2 is more likely to win');
+draw < team1 && draw < team2 && console.log('Teams are on a draw');
